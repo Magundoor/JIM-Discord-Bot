@@ -119,21 +119,3 @@ def getSameGames(user_list):
             final_list.append(item)
     new = set(final_list)
     return(new)
-
-# Call This Class Now:
-
-#your_id = 'erfan1'
-
-#make_object = SteamGameGrabber()
-#get_result = make_object.call_all(your_id)
-
-#if isinstance(get_result, dict):
-
-    #print("Dict Format : ", get_result, "\n")
-    #print("Target ID : ", your_id, "\n")
-
-    #for names, appid in get_result.items():
-        #print(names, appid)
-
-#else:
-    #print(get_result)
