@@ -100,3 +100,4 @@ ENV/
 *.pyproj
 JIM_Test.ini
 *.sln
+.vs\JIM-Discord-Bot\v15\.suo
