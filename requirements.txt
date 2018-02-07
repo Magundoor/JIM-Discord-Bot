@@ -1,0 +1,5 @@
+discord.py
+pip
+tinydb
+strawpoll.py
+cffi --only-binary all; sys_platform == 'win32'

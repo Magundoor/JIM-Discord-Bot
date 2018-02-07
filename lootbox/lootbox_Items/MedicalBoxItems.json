@@ -1,0 +1,28 @@
+{
+	"_default": {
+		"1": {
+			"name": "MedKit",
+			"discription": "A box that contains various medical suplies",
+			"value": 10,
+			"rarity": 100,
+			"lootboxKey": 2,
+			"itemKey": 1
+		},
+		"2": {
+			"name": "Super Medkit",
+			"discription": "A box that contains various super-professional medical suplies",
+			"value": 100,
+			"rarity": 30,
+			"lootboxKey": 2,
+			"itemKey": 2
+		},
+		"3": {
+			"name": "Stimpack",
+			"discription": "Stimulation Delivery Package, is a type of hand-held medication used for healing the body",
+			"value": 100,
+			"rarity": 10,
+			"lootboxKey": 2,
+			"itemKey": 3
+		}
+	}
+}

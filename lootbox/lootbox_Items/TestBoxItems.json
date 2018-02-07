@@ -1,0 +1,68 @@
+{
+	"_default": {
+		"1": {
+			"name": "Vial of Milk",
+			"discription": "A small vial filled with milk",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 1,
+			"itemKey": 1
+		},
+		"2": {
+			"name": "Can of Beans",
+			"discription": "A can of dancing beans",
+			"value": 10,
+			"rarity": 40,
+			"lootboxKey": 1,
+			"itemKey": 2
+		},
+		"3": {
+			"name": "Pink Dildo",
+			"discription": "Forged from the most exotic plastic",
+			"value": 10,
+			"rarity": 60,
+			"lootboxKey": 1,
+			"itemKey": 3
+		},
+		"4": {
+			"name": "Can of Kevin's Humor",
+			"discription": "An empty can",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 1,
+			"itemKey": 4
+		},
+		"5": {
+			"name": "Black Dildo",
+			"discription": "A 12 inch black dildo",
+			"value": 10,
+			"rarity": 60,
+			"lootboxKey": 1,
+			"itemKey": 5
+		},
+		"6": {
+			"name": "A Notecard",
+			"discription": "A blank card",
+			"value": 10,
+			"rarity": 80,
+			"lootboxKey": 1,
+			"itemKey": 6
+		},
+		"7": {
+			"name": "Abuse Pipe",
+			"discription": "What you discipline your children in a sexual manner",
+			"value": 100,
+			"rarity": 100,
+			"lootboxKey": 1,
+			"itemKey": 7
+		},
+		"8": {
+			"name": "Apple Slice",
+			"discription": "A Slice of apple",
+			"value": 1000,
+			"rarity": 100,
+			"lootboxKey": 1,
+			"itemKey": 8
+		}
+	}
+}

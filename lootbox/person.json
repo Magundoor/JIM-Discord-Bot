@@ -1,0 +1,36 @@
+{
+	"_default": {
+		"1": {
+			"name": "MagunDongle",
+			"lvl": 12,
+			"xp": 1070,
+			"lvlNext": 2208,
+			"stats": {
+				"str": 1,
+				"dex": 1,
+				"int": 1
+			},
+			"inventory": [],
+			"lootboxInventory": [],
+			"lootboxCount": 130,
+			"needsLevelup": false,
+			"plvl": 12
+		},
+		"2": {
+			"name": "Alynzos",
+			"lvl": 17,
+			"xp": 6957,
+			"lvlNext": 16767,
+			"stats": {
+				"str": 1,
+				"dex": 1,
+				"int": 1
+			},
+			"inventory": [],
+			"lootboxInventory": [],
+			"lootboxCount": 310,
+			"needsLevelup": false,
+			"plvl": 17
+		}
+	}
+}

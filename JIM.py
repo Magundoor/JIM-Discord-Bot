@@ -6,6 +6,8 @@ import urllib.request
 import itertools
 import operator
 import configparser
+from LootBox_Core import *
+from LevelSystem import *
 from game_grabber import *
 from stawpoll_poll import *
 from time import sleep
@@ -23,7 +25,8 @@ Users = Query()
 
 # Config loading information
 config = configparser.ConfigParser()
-config.read('JIM_Config.ini')
+#config.read('JIM_Config.ini')
+config.read('JIM_Test.ini')
 ['JIM_Config.ini']
 holoDeckId = config['holo-deck']['holodeckid']
 holo_deck_enabled = config['holo-deck'].getboolean('holo_deck_enabled')
@@ -388,7 +391,19 @@ async def strawpoll(context, *, poll: str):
         print('{} requested strawpoll link, {}'.format(context.message.author,data.title))
         print(' ')
         await bot.send_message(context.message.channel,"Your strawpoll URL is: {}".format(data.url))
-        
+       
+@bot.group(pass_context=True)
+async def lb(ctx):
+    """Experimental lootbox tools"""
+    if ctx.invoked_subcommand is None:
+        await bot.say('```Invalid lootbox command passed...\ndo "?lootbox help" to find out more about this command```')
+
+@lb.command(pass_context=True)
+async def give(context, *, search: str, amt: int):
+    """gives a user a lootbox"""
+    await bot.change_presence(game=discord.Game(name= "with {}".format(names[randint(0,len(names)-1)])))
+
+
 def count_letters(word):
 
     return len(word) - word.count(' ')
