@@ -3,7 +3,7 @@
 It's a Python based Discod bot for my personal use
 ## Installation
 You will only need a 3 libraries for this to work, discord.py, tinydb, strawpoll.py
-::
+
 
     $ pip install discord.py
 	$ pip install tinydb
