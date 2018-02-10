@@ -250,3 +250,16 @@ def addLootboxToInventory(User, Thing):
     Item = Thing
     Inventory.append(Item)
     db.update({'lootboxInventory': Inventory}, Search.name == User)
+
+def check_users(User):
+    db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+    Users = Query()
+    test = False
+    for _user in db:
+        if _user['name'] == User:
+            test = True
+    if test == False:
+        return False
+    else:
+        return True
+    

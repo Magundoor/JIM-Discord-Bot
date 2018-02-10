@@ -1,10 +1,11 @@
 {
 	"_default": {
 		"1": {
+			"id": 140211062229172224,
 			"name": "MagunDongle",
-			"lvl": 12,
-			"xp": 1070,
-			"lvlNext": 2208,
+			"lvl": 1,
+			"xp": 0,
+			"lvlNext": 25,
 			"stats": {
 				"str": 1,
 				"dex": 1,
@@ -12,15 +13,16 @@
 			},
 			"inventory": [],
 			"lootboxInventory": [],
-			"lootboxCount": 130,
+			"lootboxCount": 0,
 			"needsLevelup": false,
-			"plvl": 12
+			"plvl": 0
 		},
 		"2": {
+			"id": 140182896408395776,
 			"name": "Alynzos",
-			"lvl": 17,
-			"xp": 6957,
-			"lvlNext": 16767,
+			"lvl": 1,
+			"xp": 0,
+			"lvlNext": 25,
 			"stats": {
 				"str": 1,
 				"dex": 1,
@@ -28,9 +30,9 @@
 			},
 			"inventory": [],
 			"lootboxInventory": [],
-			"lootboxCount": 310,
+			"lootboxCount": 0,
 			"needsLevelup": false,
-			"plvl": 17
+			"plvl": 0
 		}
 	}
 }

@@ -309,7 +309,7 @@ async def sop(context):
     bold = 'Results:\n' + \
                  '\n'.join(['{}: {}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
     output = "```{}```".format(bold)
-    await bot.send_message(bot.get_channel(smash_pass),output)
+    #await bot.send_message(bot.get_channel(smash_pass),output)
 
 @bot.group(pass_context=True)
 async def steam(ctx):
@@ -391,7 +391,7 @@ async def strawpoll(context, *, poll: str):
         print('{} requested strawpoll link, {}'.format(context.message.author,data.title))
         print(' ')
         await bot.send_message(context.message.channel,"Your strawpoll URL is: {}".format(data.url))
-       
+
 @bot.group(pass_context=True)
 async def lb(ctx):
     """Experimental lootbox tools"""
@@ -399,10 +399,104 @@ async def lb(ctx):
         await bot.say('```Invalid lootbox command passed...\ndo "?lootbox help" to find out more about this command```')
 
 @lb.command(pass_context=True)
-async def give(context, *, search: str, amt: int):
+async def give(context):
     """gives a user a lootbox"""
-    await bot.change_presence(game=discord.Game(name= "with {}".format(names[randint(0,len(names)-1)])))
+    #search: str, amt: int
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        Name = user[0]['name']
+        lootbox = GetRandLootbox()
+        await bot.send_message(context.message.channel,"Added, {} to your inventory".format(lootbox['name']))
+        addLootboxToInventory(Name, lootbox)
 
+@lb.command(pass_context=True)
+async def open(context, *, box: str):
+    """allows a user to open a lootbox"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        Name = user[0]['name']
+        lb = box
+        print(' ')
+        found = False
+        for i in user[0]['lootboxInventory']:
+            if convert(i['name']) == convert(lb):
+                found = True 
+                lootbox_item = i['key']
+                item = GetRandItem(lootbox_item)
+                addItemToInventory(Name,item)
+                await bot.send_message(context.message.channel,'```You got {} from {}```'.format(item['name'],i['name']))
+                deleteFromLootBoxInventory(Name,convert(i['name']))
+                break
+        if found == False:
+                print(' ')
+                await bot.send_message(context.message.channel,'```You do not have a lootbox called {}```'.format(lb))
+
+@lb.command(pass_context=True)
+async def lootboxes(context):
+    """lists the users lootboxes"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        string = ""
+        for item in user[0]['lootboxInventory']:
+            string+="{}\n".format(item['name'])
+        await bot.send_message(context.message.channel,'```Lootboxes:\n{}```'.format(string))
+
+@lb.command(pass_context=True)
+async def inventory(context):
+    """lists the users inventory"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        string = ""
+        for item in user[0]['inventory']:
+            string+="{}\n".format(item['name'])
+        await bot.send_message(context.message.channel,'```Inventory:\n{}```'.format(string))
+
+@lb.command(pass_context=True)
+async def register(context):
+    """registers a new user to the lootbox system"""
+    db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+    Users = Query()
+    test = False
+    for _user in db:
+        if _user['name'] == context.message.author.name:
+            await bot.send_message(context.message.channel,'You are already registered {}'.format(context.message.author.name))
+            test = True
+    if test == False:
+        default = {
+			    "id": int(context.message.author.id),
+			    "name": context.message.author.name,
+			    "lvl": 1,
+			    "xp": 0,
+			    "lvlNext": 25,
+			    "stats": {
+				    "str": 1,
+				    "dex": 1,
+				    "int": 1
+			    },
+			    "inventory": [],
+			    "lootboxInventory": [],
+			    "lootboxCount": 0,
+			    "needsLevelup": False,
+			    "plvl": 0
+		    }
+        db.insert(default)
+        await bot.send_message(context.message.channel,'Welcome {} to the system, We wish you a sense of pride and accomplishment'.format(context.message.author.name))
 
 def count_letters(word):
 
