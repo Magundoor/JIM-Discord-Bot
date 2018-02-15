@@ -211,12 +211,11 @@ def deleteItemFromInventory(User, Thing):
     new_inventory = []
     #print("Before",Inventory)
     for i in Inventory:
-        for x in range(0,1):
-            if convert(i['name']) == convert(Thing):
-                Inventory.remove(i)
-                new_inventory = Inventory
-                db.update({'inventory': new_inventory}, Search.name == User)
-                #print("After",new_inventory)
+        if convert(i['name']) == convert(Thing):
+            Inventory.remove(i)
+            new_inventory = Inventory
+            db.update({'inventory': new_inventory}, Search.name == User)
+            #print("After",new_inventory)
             break
 
 # Deletes an item from the users inventory using a name
@@ -226,12 +225,12 @@ def deleteFromLootBoxInventory(User, Thing):
     new_inventory = []
     #print("Before",Inventory)
     for i in Inventory:
-        for x in range(0,1):
-            if convert(i['name']) == convert(Thing):
-                Inventory.remove(i)
-                new_inventory = Inventory
-                db.update({'lootboxInventory': new_inventory}, Search.name == User)
-                #print("After",new_inventory)
+    #for x in range(0,1):
+        if convert(i['name']) == convert(Thing):
+            Inventory.remove(i)
+            new_inventory = Inventory
+            db.update({'lootboxInventory': new_inventory}, Search.name == User)
+            #print("after",new_inventory)
             break
 
 # Adds an item to a users inventory

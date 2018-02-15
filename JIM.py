@@ -439,6 +439,7 @@ async def open(context, *, box: str):
                 print(' ')
                 await bot.send_message(context.message.channel,'```You do not have a lootbox called {}```'.format(lb))
 
+
 @lb.command(pass_context=True)
 async def lootboxes(context):
     """lists the users lootboxes"""
@@ -497,6 +498,21 @@ async def register(context):
 		    }
         db.insert(default)
         await bot.send_message(context.message.channel,'Welcome {} to the system, We wish you a sense of pride and accomplishment'.format(context.message.author.name))
+
+@lb.command(pass_context=True)
+async def flush(context):
+    """deletes all inventories"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        Inventory = []
+        db.update({'inventory': Inventory}, Users.name == user[0]['name'])
+        db.update({'lootboxInventory': Inventory}, Users.name == user[0]['name'])
+        await bot.send_message(context.message.channel,"I've deleted everything from your inventory {}".format(context.message.author.name))
+
 
 def count_letters(word):
 
