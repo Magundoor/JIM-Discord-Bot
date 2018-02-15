@@ -513,6 +513,24 @@ async def flush(context):
         db.update({'lootboxInventory': Inventory}, Users.name == user[0]['name'])
         await bot.send_message(context.message.channel,"I've deleted everything from your inventory {}".format(context.message.author.name))
 
+@lb.command(pass_context=True)
+async def count(context):
+    """deletes all inventories"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+        string = ""
+        inv = []
+        for item in user[0]['lootboxInventory']:
+            inv.append(item['name'])
+        counts = {i:inv.count(i) for i in inv}
+        for item in counts:
+            string+="{}: {}\n".format(item,counts[item])
+        await bot.send_message(context.message.channel,'```Inventory Totals:\n{}```'.format(string))
+
 
 def count_letters(word):
 
