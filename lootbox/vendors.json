@@ -1,0 +1,22 @@
+{
+	"_default": {
+		"1": {
+			"name": "Pawn Shop",
+			"shop_file": "the_pawn_shop",
+			"discription": "We buy everything and sell everything, don't care how or why you used it.",
+			"key": 1
+		},
+		"2": {
+			"name": "The Snak Shack",
+			"shop_file": "the_snack_shack",
+			"discription": "If your looking for quality boob mouse pads this is the right place. We sell boob mouse pads of all kinds.",
+			"key": 2
+		},
+		"3": {
+			"name": "Paddles and Punishment",
+			"shop_file": "paddles_and_punishment",
+			"discription": "The most exotic porn you will ever find.",
+			"key": 2
+		}
+	}
+}

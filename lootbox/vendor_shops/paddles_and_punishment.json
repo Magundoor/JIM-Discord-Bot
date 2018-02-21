@@ -1,0 +1,18 @@
+{
+	"_default": {
+		"1": {
+			"name": "Cops and Robbers Extended",
+			"discription": "Rated R",
+			"value": 100,
+			"rarity": 100,
+			"infinite" : true
+		},
+		"2": {
+			"name": "BDS but no M",
+			"discription": "Rated E",
+			"value": 124,
+			"rarity": 40,
+			"infinite" : true
+		}
+	}
+}

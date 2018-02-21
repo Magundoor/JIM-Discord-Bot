@@ -1,0 +1,18 @@
+{
+	"_default": {
+		"1": {
+			"name": "Abuse Pipe",
+			"discription": "What you discipline your children in a sexual manner",
+			"value": 3000,
+			"rarity": 10,
+			"infinite": false
+		},
+		"2": {
+			"name": "Love Potion",
+			"discription": "Discipline in a sexual manner",
+			"value": 3000,
+			"rarity": 10,
+			"infinite": true
+		}
+	}
+}

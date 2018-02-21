@@ -515,7 +515,7 @@ async def flush(context):
 
 @lb.command(pass_context=True)
 async def count(context):
-    """deletes all inventories"""
+    """counts lootboxes inventory"""
     if check_users(context.message.author.name) == False:
         await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
     else:
