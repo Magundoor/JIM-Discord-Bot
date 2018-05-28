@@ -36,6 +36,13 @@ smash_time = config['config']['smash_time']
 
 # Startup/Name lists
 names = [
+    "Shrek",
+    "The Muffin Man",
+    "Nigel Thornberry",
+    "John Oliver",
+    "Captain America",
+    "Thanos",
+    "Samuel L. Jackson",
     "Your Mom",
     "Donald Trump",
     "Hillary Clinton",
