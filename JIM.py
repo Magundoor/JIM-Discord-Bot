@@ -125,7 +125,7 @@ async def on_ready():
         print(' ')
     print('A.I Status: ONLINE')
     print(' ')
-    
+
 async def my_background_task():
     await bot.wait_until_ready()
     while not bot.is_closed:
@@ -226,7 +226,7 @@ async def gif(context, *, search: str):
     await bot.send_typing(context.message.channel)
     searched = search.replace(" ", "+").replace("/", "").replace("%", "")
     url = "http://api.giphy.com/v1/gifs/search?q={}&api_key=DLPaEHsJbJpHVhCUDjAxp6Eoy7Gc6o8i&limit=10".format(searched)
-    contents = urllib.request.urlopen(url).read() 
+    contents = urllib.request.urlopen(url).read()
     jsonContent = json.loads(contents)
     # all of this is the downloading feature for gifs
     #TempGif = randint(1,1000)
@@ -428,7 +428,7 @@ async def open(context, *, box: str):
         found = False
         for i in user[0]['lootboxInventory']:
             if convert(i['name']) == convert(lb):
-                found = True 
+                found = True
                 lootbox_item = i['key']
                 item = GetRandItem(lootbox_item)
                 addItemToInventory(Name,item)
@@ -439,9 +439,8 @@ async def open(context, *, box: str):
                 print(' ')
                 await bot.send_message(context.message.channel,'```You do not have a lootbox called {}```'.format(lb))
 
-
 @lb.command(pass_context=True)
-async def lootboxes(context):
+async def lootboxes(context, number : int = 1):
     """lists the users lootboxes"""
     if check_users(context.message.author.name) == False:
         await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
@@ -449,13 +448,60 @@ async def lootboxes(context):
         db = TinyDB(os.path.join(lootbox_path, 'person.json'))
         Users = Query()
         user = db.search(Users.id == int(context.message.author.id))
-        string = ""
+        mark = user[0]['name']
+        # defines inventory
+        inventory = []
+        splitInventory = []
+        check = True
         for item in user[0]['lootboxInventory']:
-            string+="{}\n".format(item['name'])
-        await bot.send_message(context.message.channel,'```Lootboxes:\n{}```'.format(string))
+            inventory.append("{}".format(item['name']))
+        if len(inventory) <= 0:
+             check = False
+        elif len(inventory) <= 12:
+            dif = 12-len(inventory)
+            for i in range(0,dif):
+                inventory.append('\u200b')
+            page_content = inventory
+            splitInventory.append(inventory)
+            if number > len(splitInventory):
+                page = 1
+            else:
+                page = number
+        else:
+            # splits inventrory into chunks of 12
+            for i in range(0, len(inventory), 12):
+                chunk = inventory[i:i + 12]
+                splitInventory.append(chunk)
+            # defines default page
+            if number > len(splitInventory):
+                page = 1
+            else:
+                page = number
+            page_content = splitInventory[page-1]
+            # fills Inventory if there is lower than 12 items
+            if len(page_content) < 12:
+                dif = 12-len(page_content)
+                for i in range(0,dif):
+                    page_content.append('\u200b')
+        if check == True:
+            # creates embed with 12 empty slots
+            embed = discord.Embed(title="{}'s Loot boxes".format(mark), colour=discord.Colour(0xfe11c6), description='\u200b')
+            embed.add_field(name="{}".format(page_content[0]), value="{}".format(page_content[3]), inline=True)
+            embed.add_field(name="{}".format(page_content[1]), value="{}".format(page_content[4]), inline=True)
+            embed.add_field(name="{}".format(page_content[2]), value="{}".format(page_content[5]), inline=True)
+            embed.add_field(name="{}".format(page_content[6]), value="{}".format(page_content[9]), inline=True)
+            embed.add_field(name="{}".format(page_content[7]), value="{}".format(page_content[10]), inline=True)
+            embed.add_field(name="{}".format(page_content[8]), value="{}".format(page_content[11]), inline=True)
+            # creates pagnation
+            embed.add_field(name='\u200b', value="Page {}/{}".format(page,len(splitInventory)), inline=True)
+            await bot.send_message(context.message.channel, embed=embed)
+        else:
+            await bot.send_message(context.message.channel,'You have no items here')
+
+
 
 @lb.command(pass_context=True)
-async def inventory(context):
+async def inventory(context, number : int = 1):
     """lists the users inventory"""
     if check_users(context.message.author.name) == False:
         await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
@@ -463,10 +509,55 @@ async def inventory(context):
         db = TinyDB(os.path.join(lootbox_path, 'person.json'))
         Users = Query()
         user = db.search(Users.id == int(context.message.author.id))
-        string = ""
+        mark = user[0]['name']
+        # defines inventory
+        inventory = []
+        splitInventory = []
+        check = True
         for item in user[0]['inventory']:
-            string+="{}\n".format(item['name'])
-        await bot.send_message(context.message.channel,'```Inventory:\n{}```'.format(string))
+            inventory.append("{}".format(item['name']))
+        if len(inventory) <= 0:
+             check = False
+        elif len(inventory) <= 12:
+            dif = 12-len(inventory)
+            for i in range(0,dif):
+                inventory.append('\u200b')
+            page_content = inventory
+            splitInventory.append(inventory)
+            if number > len(splitInventory):
+                page = 1
+            else:
+                page = number
+        else:
+            # splits inventrory into chunks of 12
+            for i in range(0, len(inventory), 12):
+                chunk = inventory[i:i + 12]
+                splitInventory.append(chunk)
+            # defines default page
+            if number > len(splitInventory):
+                page = 1
+            else:
+                page = number
+            page_content = splitInventory[page-1]
+            # fills Inventory if there is lower than 12 items
+            if len(page_content) < 12:
+                dif = 12-len(page_content)
+                for i in range(0,dif):
+                    page_content.append('\u200b')
+        if check == True:
+            # creates embed with 12 empty slots
+            embed = discord.Embed(title="{}'s Inventory".format(mark), colour=discord.Colour(0xfe11c6), description='\u200b')
+            embed.add_field(name="{}".format(page_content[0]), value="{}".format(page_content[3]), inline=True)
+            embed.add_field(name="{}".format(page_content[1]), value="{}".format(page_content[4]), inline=True)
+            embed.add_field(name="{}".format(page_content[2]), value="{}".format(page_content[5]), inline=True)
+            embed.add_field(name="{}".format(page_content[6]), value="{}".format(page_content[9]), inline=True)
+            embed.add_field(name="{}".format(page_content[7]), value="{}".format(page_content[10]), inline=True)
+            embed.add_field(name="{}".format(page_content[8]), value="{}".format(page_content[11]), inline=True)
+            # creates pagnation
+            embed.add_field(name='\u200b', value="Page {}/{}".format(page,len(splitInventory)), inline=True)
+            await bot.send_message(context.message.channel, embed=embed)
+        else:
+            await bot.send_message(context.message.channel,'You have no items here')
 
 @lb.command(pass_context=True)
 async def register(context):
@@ -530,6 +621,62 @@ async def count(context):
         for item in counts:
             string+="{}: {}\n".format(item,counts[item])
         await bot.send_message(context.message.channel,'```Inventory Totals:\n{}```'.format(string))
+
+@lb.command(pass_context=True)
+async def shops(context):
+    """displays avalible shops"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+
+mark = ""
+@lb.command(pass_context=True)
+async def disp(context, number : int = 1):
+    """temporary that displays info"""
+    if check_users(context.message.author.name) == False:
+        await bot.send_message(context.message.channel,'You are not yet registered {}, do **?register** to register'.format(context.message.author.name))
+    else:
+        db = TinyDB(os.path.join(lootbox_path, 'person.json'))
+        Users = Query()
+        user = db.search(Users.id == int(context.message.author.id))
+
+        mark = user[0]['name']
+
+        # defines inventory
+        inventory = []
+        for item in user[0]['inventory']:
+            inventory.append("{}".format(item['name']))
+        # splits inventrory into chunks of 12
+        splitInventory = []
+        for i in range(0, len(inventory), 12):
+            chunk = inventory[i:i + 12]
+            splitInventory.append(chunk)
+        # defines default page
+        page = number
+        page_content = splitInventory[page-1]
+
+        # fills Inventory if there is lower than 12 items
+        if len(page_content) < 12:
+            dif = 12-len(page_content)
+            for i in (0,dif):
+                page_content.append('\u200b')
+
+        # creates embed with 12 empty slots
+        embed = discord.Embed(title="{}'s Inventory".format(mark), colour=discord.Colour(0xfe11c6), description='\u200b')
+        embed.add_field(name="{}".format(page_content[0]), value="{}".format(page_content[3]), inline=True)
+        embed.add_field(name="{}".format(page_content[1]), value="{}".format(page_content[4]), inline=True)
+        embed.add_field(name="{}".format(page_content[2]), value="{}".format(page_content[5]), inline=True)
+        embed.add_field(name="{}".format(page_content[6]), value="{}".format(page_content[9]), inline=True)
+        embed.add_field(name="{}".format(page_content[7]), value="{}".format(page_content[10]), inline=True)
+        embed.add_field(name="{}".format(page_content[8]), value="{}".format(page_content[11]), inline=True)
+
+        # creates pagnation
+        embed.add_field(name='\u200b', value="Page {}/{}".format(page,len(splitInventory)), inline=True)
+
+        #await bot.say(content="this `supports` __a__ **subset** *of* ~~markdown~~ 😃 ```js\nfunction foo(bar) {\n  console.log(bar);\n}\n\nfoo(1);```", embed=embed)
+
+        await bot.send_message(context.message.channel, embed=embed)
 
 
 def count_letters(word):

@@ -59,12 +59,14 @@ while True:
                 if convert(item['name']) == convert(buy):
                     found = True
                     # Do something
+                    
+                    addItemToInventory("MagunDongle",item)
                     print("\nyou bought: {} for {} credits".format(item['name'],item['value']))
                     break
             if found == False:
                 print("\n-this store doesn't sell an item called",buy)
 
-    elif space == "Help":
+    elif space == "help":
         print('buy- buy an item from a shop')
 
     else:

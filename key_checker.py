@@ -34,7 +34,7 @@ def check_items(x):
         if i['lootboxKey'] != x['key']:
                  print(" {} has bad lootbox key needs to be {} was {}".format(i['name'],x['key'],i['lootboxKey']))
     print("---done with {}---\n".format(x['name']))
-	
+
 print("Running key_checker on lootboxes:")
 print(" ")
 LBS = LootBoxes.all()

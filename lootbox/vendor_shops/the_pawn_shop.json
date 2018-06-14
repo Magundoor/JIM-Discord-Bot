@@ -5,14 +5,14 @@
 			"discription": "What you discipline your children in a sexual manner",
 			"value": 3000,
 			"rarity": 10,
-			"infinite": false
+			"quantity": false
 		},
 		"2": {
 			"name": "Love Potion",
 			"discription": "Discipline in a sexual manner",
 			"value": 3000,
 			"rarity": 10,
-			"infinite": true
+			"quantity": true
 		}
 	}
 }

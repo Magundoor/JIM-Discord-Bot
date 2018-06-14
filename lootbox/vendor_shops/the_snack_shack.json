@@ -5,14 +5,14 @@
 			"discription": "What you discipline your children in a sexual manner",
 			"value": 100,
 			"rarity": 100,
-			"infinite" : true
+			"quantity" : true
 		},
 		"2": {
 			"name": "Red Vintage Med Weeb Pad",
 			"discription": "What you discipline your children in a sexual manner",
 			"value": 124,
 			"rarity": 40,
-			"infinite" : true
+			"quantity" : true
 		}
 	}
 }
