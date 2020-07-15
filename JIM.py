@@ -268,7 +268,7 @@ async def sop(context):
     await bot.start_private_message(context.message.author)
     msg = await bot.wait_for_message(author=context.message.author)
     await bot.send_message(context.message.author, completion[randint(0,len(completion)-1)])
-    await bot.send_message(bot.get_channel(smash_pass), "Time to vote!:\n**You have {} to vote**\n{}".format(display_time,msg.content))
+    await bot.send_message(bot.get_channel(smash_pass), "Time to vote!:")
     options = ["Smash","Pass"]
     reactions = ['👍', '👎']
     question = "Smash or Pass?"
@@ -308,74 +308,75 @@ async def sop(context):
                 voters.append(reactor.id)
     bold = 'Results:\n' + \
                  '\n'.join(['{}: {}'.format(opt_dict[key], tally[key]) for key in tally.keys()])
+     #await bot.send_message(bot.get_channel(smash_pass),output)
     output = "```{}```".format(bold)
-    #await bot.send_message(bot.get_channel(smash_pass),output)
 
-@bot.group(pass_context=True)
-async def steam(ctx):
-    """Tools to help you decide what games to play."""
-    if ctx.invoked_subcommand is None:
-        await bot.say('```Invalid steam command passed...\ndo "?steam help" to find out more about this command```')
+# steam commands that have been removed because steam hates me
+#@bot.group(pass_context=true)
+#async def steam(ctx):
+#    """tools to help you decide what games to play."""
+#    if ctx.invoked_subcommand is none:
+#        await bot.say('```invalid steam command passed...\ndo "?steam help" to find out more about this command```')
 
-@steam.command(pass_context=True)
-async def sos(context, *, search: str):
-    """Paste some Steam profile urls to get all the common games"""
-    await bot.delete_message(context.message)
-    s = search.replace(" ", "")
-    user_list = s.split(',')
-    run = True
-    for item in user_list:
-        if item[0:25] != "http://steamcommunity.com":
-            m = await bot.send_message(context.message.channel,"```The items you entered were not Steam profile URLs do ?steam help to learn more about this command.```")
-            await asyncio.sleep(160)
-            await bot.delete_message(m)
-            run = False
-            break
-    if run == True:
-        msg = await bot.send_message(context.message.channel,"Calculating Games one second...")
-        list = getSameGames(user_list)
-        lined = ""
-        wordcount = ""
-        for item in list:
-            lined += "{}\n".format(item)
-            wordcount += "{} ".format(item)
-        if count_letters(wordcount) >= 1900:
-            firstpart, secondpart = split(lined)
-            await bot.edit_message(msg, new_content="```You all have:\n\n{}```".format(firstpart))
-            await bot.send_message(context.message.channel, "```{}```".format(secondpart))
-        else:
-            await bot.edit_message(msg, new_content="```You all have:\n\n{}```".format(lined))
+#@steam.command(pass_context=true)
+#async def sos(context, *, search: str):
+#    """paste some steam profile urls to get all the common games"""
+#    await bot.delete_message(context.message)
+#    s = search.replace(" ", "")
+#    user_list = s.split(',')
+#    run = true
+#    for item in user_list:
+#        if item[0:25] != "http://steamcommunity.com":
+#            m = await bot.send_message(context.message.channel,"```the items you entered were not steam profile urls do ?steam help to learn more about this command.```")
+#            await asyncio.sleep(160)
+#            await bot.delete_message(m)
+#            run = false
+#            break
+#    if run == true:
+#        msg = await bot.send_message(context.message.channel,"calculating games one second...")
+#        list = getsamegames(user_list)
+#        lined = ""
+#        wordcount = ""
+#        for item in list:
+#            lined += "{}\n".format(item)
+#            wordcount += "{} ".format(item)
+#        if count_letters(wordcount) >= 1900:
+#            firstpart, secondpart = split(lined)
+#            await bot.edit_message(msg, new_content="```you all have:\n\n{}```".format(firstpart))
+#            await bot.send_message(context.message.channel, "```{}```".format(secondpart))
+#        else:
+#            await bot.edit_message(msg, new_content="```you all have:\n\n{}```".format(lined))
 
-@steam.command(pass_context=True)
-async def roulette(context, *, search: str):
-    """Chooses a random game based on steam profile urls"""
-    await bot.delete_message(context.message)
-    s = search.replace(" ", "")
-    user_list = s.split(',')
-    run = True
-    for item in user_list:
-        if item[0:25] != "http://steamcommunity.com":
-            m = await bot.send_message(context.message.channel,"```The items you entered were not Steam profile URLs do ?steam help to learn more about this command.```")
-            await asyncio.sleep(160)
-            await bot.delete_message(m)
-            run = False
-            break
-    if run == True:
-        msg = await bot.send_message(context.message.channel,"Calculating Games one second...")
-        list = getSameGames(user_list)
-        list2 = []
-        for item in list:
-            list2.append(item)
-        for i in range(0,8):
-            await asyncio.sleep(0.3)
-            game = list2[randint(0,len(list2)-1)]
-            await bot.edit_message(msg, new_content="Choosing game: {}".format(game))
-        await bot.edit_message(msg, new_content="The game is: {}".format(game))
+#@steam.command(pass_context=true)
+#async def roulette(context, *, search: str):
+#    """chooses a random game based on steam profile urls"""
+#    await bot.delete_message(context.message)
+#    s = search.replace(" ", "")
+#    user_list = s.split(',')
+#    run = true
+#    for item in user_list:
+#        if item[0:25] != "http://steamcommunity.com":
+#            m = await bot.send_message(context.message.channel,"```the items you entered were not steam profile urls do ?steam help to learn more about this command.```")
+#            await asyncio.sleep(160)
+#            await bot.delete_message(m)
+#            run = false
+#            break
+#    if run == true:
+#        msg = await bot.send_message(context.message.channel,"calculating games one second...")
+#        list = getsamegames(user_list)
+#        list2 = []
+#        for item in list:
+#            list2.append(item)
+#        for i in range(0,8):
+#            await asyncio.sleep(0.3)
+#            game = list2[randint(0,len(list2)-1)]
+#            await bot.edit_message(msg, new_content="choosing game: {}".format(game))
+#        await bot.edit_message(msg, new_content="the game is: {}".format(game))
 
-@steam.command(pass_context=True)
-async def help(context):
-    """How to use the steam tools"""
-    msg = await bot.send_message(context.message.channel,'```?steam\n \nDo "?steam roulette" followed by as many steam profile URLs as you want \n  just make sure to seperate each one with a ,\n  this will give you a random game that all of the steam profiles entered own\n\nDo "?steam sos" followed by as many steam profile URLs as you want \n    just make sure to seperate each one with a ,\n  this will give you a list of all the games the steam profiles have in common\n\nTo get a profile URL go to a users steam profile Right Click>Copy Page URL\n\nExample: ?steam roulette http://steamcommunity.com/profiles/76561198107487727, http://steamcommunity.com/id/Kechipo/```')
+#@steam.command(pass_context=true)
+#async def help(context):
+#    """how to use the steam tools"""
+#    msg = await bot.send_message(context.message.channel,'```?steam\n \ndo "?steam roulette" followed by as many steam profile urls as you want \n  just make sure to seperate each one with a ,\n  this will give you a random game that all of the steam profiles entered own\n\ndo "?steam sos" followed by as many steam profile urls as you want \n    just make sure to seperate each one with a ,\n  this will give you a list of all the games the steam profiles have in common\n\nto get a profile url go to a users steam profile right click>copy page url\n\nexample: ?steam roulette http://steamcommunity.com/profiles/76561198107487727, http://steamcommunity.com/id/kechipo/```')
 
 @bot.command(pass_context=True)
 async def strawpoll(context, *, poll: str):
@@ -396,7 +397,7 @@ async def strawpoll(context, *, poll: str):
 async def lb(ctx):
     """Experimental lootbox tools"""
     if ctx.invoked_subcommand is None:
-        await bot.say('```Invalid lootbox command passed...\ndo "?lootbox help" to find out more about this command```')
+        await bot.say('```Invalid lootbox command passed...\ndo "?help lb" to find out more about this command```')
 
 @lb.command(pass_context=True)
 async def give(context):
@@ -498,7 +499,36 @@ async def lootboxes(context, number : int = 1):
         else:
             await bot.send_message(context.message.channel,'You have no items here')
 
+async def level_monitor():
+    # system that updates every users level every ten minutes and also rewards users based on certain conditions
+    await bot.wait_until_ready()
+    while not bot.is_closed:
 
+        # Rewards
+        ##STATUS REWARDS
+        # if user is online they recive a small reward.
+        # if a user is online and also playing a game they recive a little more
+        # if a user is online and playing the same game as someone else we will assume they are playing together and will recive more of a reward.
+        ##TEXT REWARDS
+        # if a user posts any message
+        # if a user posts a youtube link 
+        # if a user posts an image
+        # if user posts a gif
+        # if a user reacts to a gif
+        #VOICE REWARDS
+        # if users are in a call together they will recive a larger reward
+
+        # checks online status every 10 mins
+        await asyncio.sleep(6)
+        for member in bot.get_all_members():
+            print(member)
+            #if str(member.status) == "online":
+                # checks multiple game types
+                #print(member.name, member.status)
+                # does something
+
+        await asyncio.sleep(600) # task runs every 10 mins 600
+bot.loop.create_task(level_monitor())
 
 @lb.command(pass_context=True)
 async def inventory(context, number : int = 1):
@@ -673,8 +703,6 @@ async def disp(context, number : int = 1):
 
         # creates pagnation
         embed.add_field(name='\u200b', value="Page {}/{}".format(page,len(splitInventory)), inline=True)
-
-        #await bot.say(content="this `supports` __a__ **subset** *of* ~~markdown~~ 😃 ```js\nfunction foo(bar) {\n  console.log(bar);\n}\n\nfoo(1);```", embed=embed)
 
         await bot.send_message(context.message.channel, embed=embed)
 

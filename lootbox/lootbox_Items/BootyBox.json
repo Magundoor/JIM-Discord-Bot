@@ -1,0 +1,36 @@
+{
+	"_default": {
+		"1": {
+			"name": "Vip Pass",
+			"discription": "A small vial filled with milk",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 4,
+			"itemKey": 1
+		},
+		"2": {
+			"name": "Duck Bananas",
+			"discription": "A small vial filled with milk",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 4,
+			"itemKey": 2
+		},
+		"3": {
+			"name": "Bowling Ball",
+			"discription": "A small vial filled with milk",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 4,
+			"itemKey": 3
+		},
+		"4": {
+			"name": "Cube of Fur",
+			"discription": "A small vial filled with milk",
+			"value": 10,
+			"rarity": 70,
+			"lootboxKey": 4,
+			"itemKey": 4
+		}
+	}
+}

@@ -1,28 +1,36 @@
 {
-  "_default": {
-    "1": {
-      "name": "Test Box",
-      "rarity": 100,
-      "itemPool": "TestBoxItems",
-      "discription": "A mega super unrare lootbox meant for testing",
-      "icon": "TestBox.png",
-      "key" : 1
-    },
-    "2": {
-      "name": "Medical Box",
-      "rarity": 100,
-      "itemPool": "MedicalBoxItems",
-      "discription": "A hightech medical box",
-      "icon": "MedicalBox.png",
-      "key": 2
-    },
-    "3": {
-      "name": "Poop Box",
-      "rarity": 100,
-      "itemPool": "PoopBoxItems",
-      "discription": "A poopy box",
-      "icon": "MedicalBox.png",
-      "key": 3
-    }
-  }
+	"_default": {
+		"1": {
+			"name": "Test Box",
+			"rarity": 10,
+			"itemPool": "TestBoxItems",
+			"discription": "A mega super unrare lootbox meant for testing",
+			"icon": "TestBox.png",
+			"key": 1
+		},
+		"2": {
+			"name": "Medical Box",
+			"rarity": 10,
+			"itemPool": "MedicalBoxItems",
+			"discription": "A hightech medical box",
+			"icon": "MedicalBox.png",
+			"key": 2
+		},
+		"3": {
+			"name": "Poop Box",
+			"rarity": 10,
+			"itemPool": "PoopBoxItems",
+			"discription": "A poopy box",
+			"icon": "MedicalBox.png",
+			"key": 3
+		},
+		"4": {
+			"name": "Booty Box",
+			"rarity": 20,
+			"itemPool": "BootyBox",
+			"discription": "A booty box",
+			"icon": "MedicalBox.png",
+			"key": 4
+		}
+	}
 }
